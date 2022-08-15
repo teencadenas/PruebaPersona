@@ -28,44 +28,30 @@ public class IFempleado extends javax.swing.JInternalFrame {
 
     public Empleado crearNuevoEmpleado(){
         try{
-            if (ValidarVacios()==true){
-                JOptionPane.showMessageDialog(null,"Datos incompletos");
-                return null;
-            }if(!camposTexto()==true){
-                JOptionPane.showMessageDialog(null,"Datos incorrectos T");
-                return null;
-            }if(!camposNumericos()==true){
-                JOptionPane.showMessageDialog(null,"Datosincorrectos N");
-                return null;
-            }if(!campoFecha()==true){
-                JOptionPane.showMessageDialog(null,"Formato incorrectos");
-                return null;
-                } else {
-                String nombre1 = tFNombre1.getText();
-                String nombre2 = tfNombre2.getText();
-                String apellido1 = tFApellido1.getText();
-                String apellido2 = tFApellido2.getText();
-                String identificacion = cBDocumento.getSelectedItem().toString();
-                String numeroidentificacion = tFNumeroIdentificacion.getText();
-                String fechaNacimiento = tFFechaNacimiento.getText();
-                String direccion = tFDireccion.getText();
-                String ciudad = cBCiudadPersona.getSelectedItem().toString();
-                String regional = cBRegional.getSelectedItem().toString();
-                String telefonoPersona = tFTelefonoPersonal.getText();
-                String eMailPersona = tFEMailPersona.getText();
-                String fechaIngreso = tFFechaIngreso.getText();
-                String cargo = cBCargo.getSelectedItem().toString();
-                String salario = cBSalario.getSelectedItem().toString();
-                String empleadoId = tFEmpleadoId.getText();
-                String usuario = tFUsuario.getText();
-                String contraseña = lBContraseña.getText();
-                String eMailEmpresa = tFEMailEmpresa.getText();
-                Empleado nuevo = new Empleado(empleadoId, fechaIngreso,"N/A", cargo, regional, salario, usuario, contraseña, eMailEmpresa, identificacion, numeroidentificacion, nombre1, nombre2, apellido1, apellido2, fechaNacimiento, direccion, ciudad, telefonoPersona, eMailPersona);
-                return nuevo;
-            }
-            }catch(Exception e){                 
-                System.out.println("vista &&"+e.getMessage());
-            }            
+            String nombre1 = tFNombre1.getText();
+            String nombre2 = tfNombre2.getText();
+            String apellido1 = tFApellido1.getText();
+            String apellido2 = tFApellido2.getText();
+            String identificacion = cBDocumento.getSelectedItem().toString();
+            String numeroidentificacion = tFNumeroIdentificacion.getText();
+            String fechaNacimiento = tFFechaNacimiento.getText();
+            String direccion = tFDireccion.getText();
+            String ciudad = cBCiudadPersona.getSelectedItem().toString();
+            String regional = cBRegional.getSelectedItem().toString();
+            String telefonoPersona = tFTelefonoPersonal.getText();
+            String eMailPersona = tFEMailPersona.getText();
+            String fechaIngreso = tFFechaIngreso.getText();
+            String cargo = cBCargo.getSelectedItem().toString();
+            String salario = cBSalario.getSelectedItem().toString();
+            String empleadoId = tFEmpleadoId.getText();
+            String usuario = tFUsuario.getText();
+            String contraseña = lBContraseña.getText();
+            String eMailEmpresa = tFEMailEmpresa.getText();
+            Empleado nuevo = new Empleado(empleadoId, fechaIngreso,"N/A", cargo, regional, salario, usuario, contraseña, eMailEmpresa, identificacion, numeroidentificacion, nombre1, nombre2, apellido1, apellido2, fechaNacimiento, direccion, ciudad, telefonoPersona, eMailPersona);
+            return nuevo;
+        }catch(Exception e){                 
+            System.out.println("vista &&"+e.getMessage());
+        }            
         return null;
     }
     
@@ -76,9 +62,9 @@ public class IFempleado extends javax.swing.JInternalFrame {
                tfNombre2.getText().trim().isEmpty()&&cBCargo.getSelectedItem().toString().trim().isEmpty()&&cBCiudadPersona.getSelectedItem().toString().trim().isEmpty()&&cBDocumento.getSelectedItem().toString().trim().isEmpty()&&
                cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty();
     }
+    
     private boolean camposNumericos(){
-        return tFNumeroIdentificacion.getText().matches("[1-9]*")&&tFTelefonoPersonal.getText().matches("[1-9]*")&&
-                cBSalario.getSelectedItem().toString().matches("[1-9]*");
+        return tFNumeroIdentificacion.getText().matches("[1-9]*")&&tFTelefonoPersonal.getText().matches("[1-9]*");
     }
     
     private boolean camposTexto(){
@@ -86,7 +72,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     }
     
     private boolean campoFecha(){
-        return tFFechaIngreso.getText().matches("\\d{4}-\\d{2}-\\d{2}$")&&tFFechaNacimiento.getText().matches("\\d{4}-\\d{2}-\\d{2}$")&&tFFechaRetiro.getText().matches("\\d{4}-\\d{2}-\\d{2}$");
+        return tFFechaIngreso.getText().matches("\\d{2}-\\d{2}-\\d{4}$")&&tFFechaNacimiento.getText().matches("\\d{2}-\\d{2}-\\d{4}$");
     }
     
     private String crearEmpeadoId(){
@@ -170,24 +156,24 @@ public class IFempleado extends javax.swing.JInternalFrame {
         tFUsuario = new javax.swing.JTextField();
         lBContraseña = new javax.swing.JTextField();
         tFEMailEmpresa = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lBNombre1 = new javax.swing.JLabel();
+        lbNombre2 = new javax.swing.JLabel();
+        lBApellido1 = new javax.swing.JLabel();
+        lBApellido2 = new javax.swing.JLabel();
+        lBTipoDocumento = new javax.swing.JLabel();
+        lBNumeroDocumento = new javax.swing.JLabel();
+        LBFechaNacimiento = new javax.swing.JLabel();
+        lBDireccion = new javax.swing.JLabel();
+        lBCiudad = new javax.swing.JLabel();
+        lBRegional = new javax.swing.JLabel();
+        lBTelefonoPersonal = new javax.swing.JLabel();
+        lBEMailPersona = new javax.swing.JLabel();
         JBGrabar = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        lBEmpleadoId = new javax.swing.JLabel();
+        lBFechaIngreso = new javax.swing.JLabel();
+        lBFechaRetiro = new javax.swing.JLabel();
+        lBCargo = new javax.swing.JLabel();
+        lBSalario = new javax.swing.JLabel();
+        lBIdEmpleado = new javax.swing.JLabel();
         lBusuarioEmpleado = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         lbEMailEmpresa = new javax.swing.JLabel();
@@ -197,94 +183,114 @@ public class IFempleado extends javax.swing.JInternalFrame {
         setAutoscrolls(true);
         setPreferredSize(new java.awt.Dimension(1000, 590));
 
-        tfNombre2.setForeground(new java.awt.Color(204, 204, 204));
-        tfNombre2.setText("Nombre 2");
+        tfNombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombre2KeyTyped(evt);
+            }
+        });
 
-        tFApellido1.setForeground(new java.awt.Color(204, 204, 204));
-        tFApellido1.setText("Apellido1");
+        tFApellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFApellido1KeyTyped(evt);
+            }
+        });
 
-        tFApellido2.setForeground(new java.awt.Color(204, 204, 204));
-        tFApellido2.setText("Apellido2");
+        tFApellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFApellido2KeyTyped(evt);
+            }
+        });
 
-        tFNombre1.setForeground(new java.awt.Color(204, 204, 204));
-        tFNombre1.setText("Nombre 1");
+        tFNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFNombre1KeyTyped(evt);
+            }
+        });
 
-        cBDocumento.setForeground(new java.awt.Color(204, 204, 204));
-        cBDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Documento", "Cedula", "C.Extangeria", "T.Identidad", "Pasaporte" }));
+        cBDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Cedula", "C.Extangeria", "T.Identidad", "Pasaporte" }));
 
-        tFNumeroIdentificacion.setForeground(new java.awt.Color(204, 204, 204));
-        tFNumeroIdentificacion.setText("Numero Documento");
+        tFNumeroIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFNumeroIdentificacionKeyTyped(evt);
+            }
+        });
 
-        cBCiudadPersona.setForeground(new java.awt.Color(204, 204, 204));
         cBCiudadPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        tFFechaNacimiento.setForeground(new java.awt.Color(204, 204, 204));
-        tFFechaNacimiento.setText("Fecha Nacimiento");
+        tFFechaNacimiento.setText("DD-MM-AAAA");
 
-        tFDireccion.setForeground(new java.awt.Color(204, 204, 204));
-        tFDireccion.setText("Direccion");
+        tFDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFDireccionKeyTyped(evt);
+            }
+        });
 
-        tFTelefonoPersonal.setForeground(new java.awt.Color(204, 204, 204));
-        tFTelefonoPersonal.setText("Tel.Personal");
+        tFTelefonoPersonal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFTelefonoPersonalKeyTyped(evt);
+            }
+        });
 
-        tFEMailPersona.setForeground(new java.awt.Color(204, 204, 204));
-        tFEMailPersona.setText("E-mail.Personal");
+        tFEMailPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFEMailPersonaKeyTyped(evt);
+            }
+        });
 
-        cBRegional.setForeground(new java.awt.Color(204, 204, 204));
-        cBRegional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Regional", "Norte", "Sur", "Oriente", "Occidente" }));
+        cBRegional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Norte", "Sur", "Oriente", "Occidente" }));
 
-        tFFechaIngreso.setForeground(new java.awt.Color(204, 204, 204));
-        tFFechaIngreso.setText("Fecha Ingreso");
+        tFFechaIngreso.setText("DD-MM-AAAA");
 
         tFFechaRetiro.setEditable(false);
-        tFFechaRetiro.setForeground(new java.awt.Color(204, 204, 204));
-        tFFechaRetiro.setText("Fecha Retiro");
+        tFFechaRetiro.setText("AA-MM-AAAA");
 
-        cBCargo.setForeground(new java.awt.Color(204, 204, 204));
-        cBCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cargo", "Tecnico", "Analista", "Mensajero" }));
+        cBCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Tecnico", "Analista", "Mensajero" }));
 
-        cBSalario.setForeground(new java.awt.Color(204, 204, 204));
-        cBSalario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salario", "1 SMLV", "1.5 SMLV", "2 SMLV" }));
+        cBSalario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 SMLV", "1.5 SMLV", "2 SMLV" }));
 
         tFEmpleadoId.setEditable(false);
-        tFEmpleadoId.setForeground(new java.awt.Color(204, 204, 204));
-        tFEmpleadoId.setText("EmpleadoId");
 
         tFUsuario.setEditable(false);
-        tFUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        tFUsuario.setText("Usuario");
 
         lBContraseña.setEditable(false);
-        lBContraseña.setForeground(new java.awt.Color(204, 204, 204));
-        lBContraseña.setText("Contraseña");
 
         tFEMailEmpresa.setEditable(false);
-        tFEMailEmpresa.setForeground(new java.awt.Color(204, 204, 204));
-        tFEMailEmpresa.setText("E-Mail Empresa");
 
-        jLabel2.setText("jLabel2");
+        lBNombre1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBNombre1.setText("NOMBRE");
 
-        jLabel3.setText("jLabel3");
+        lbNombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNombre2.setText("NOMBRE ");
 
-        jLabel4.setText("jLabel4");
+        lBApellido1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBApellido1.setText("APELLIDO ");
 
-        jLabel5.setText("jLabel5");
+        lBApellido2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBApellido2.setText("APELLIDO");
 
-        jLabel6.setText("jLabel6");
+        lBTipoDocumento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBTipoDocumento.setText("TIPO DOCUMENTO");
 
-        jLabel7.setText("jLabel7");
+        lBNumeroDocumento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBNumeroDocumento.setText("NUMERO DOCUMENTO");
 
-        jLabel8.setText("jLabel8");
+        LBFechaNacimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LBFechaNacimiento.setText("FECHA NACIMIENTO");
 
-        jLabel9.setText("jLabel9");
+        lBDireccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBDireccion.setText("DIRECCION");
 
-        jLabel10.setText("jLabel10");
+        lBCiudad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBCiudad.setText("CIUDAD");
 
-        jLabel11.setText("jLabel11");
+        lBRegional.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBRegional.setText("REGIONAL");
 
-        jLabel12.setText("jLabel12");
+        lBTelefonoPersonal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBTelefonoPersonal.setText("TELEFONO PER.");
 
-        jLabel13.setText("jLabel13");
+        lBEMailPersona.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBEMailPersona.setText("E-MAIL PERS.");
 
         JBGrabar.setText("REGISTRAR");
         JBGrabar.addActionListener(new java.awt.event.ActionListener() {
@@ -293,25 +299,29 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel14.setText("jLabel14");
+        lBFechaIngreso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBFechaIngreso.setText("FECHA INGRESO");
 
-        jLabel15.setText("jLabel15");
+        lBFechaRetiro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBFechaRetiro.setText("FECHA RETIRO");
 
-        jLabel16.setText("jLabel16");
+        lBCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBCargo.setText("CARGO");
 
-        jLabel17.setText("jLabel17");
+        lBSalario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBSalario.setText("SALARIO");
 
-        lBEmpleadoId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lBEmpleadoId.setText("Numero de empleado");
+        lBIdEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBIdEmpleado.setText("ID EMPLEADO");
 
         lBusuarioEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lBusuarioEmpleado.setText("Usuario Empleado");
+        lBusuarioEmpleado.setText("USUARIO EMPLEADO");
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Contraseña");
+        jLabel20.setText("CONTRASEÑA");
 
         lbEMailEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbEMailEmpresa.setText("E-mail Empresa");
+        lbEMailEmpresa.setText("E-MAIL EMPRESA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -331,13 +341,13 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(tFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lBEMailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cBCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -352,7 +362,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lBEmpleadoId, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lBIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(lBusuarioEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -373,36 +383,36 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                         .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lBTipoDocumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tFNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lBNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lBNumeroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(LBFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(tfNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(tFApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lBApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tFApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lBDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lBApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBFechaRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lBSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(tFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -411,30 +421,30 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                 .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cBSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(31, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                    .addComponent(lBNombre1)
+                    .addComponent(lbNombre2)
+                    .addComponent(lBApellido1)
+                    .addComponent(lBApellido2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tFNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
+                    .addComponent(lBTipoDocumento)
+                    .addComponent(lBNumeroDocumento)
+                    .addComponent(LBFechaNacimiento)
+                    .addComponent(lBDireccion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cBDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFNumeroIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -442,46 +452,46 @@ public class IFempleado extends javax.swing.JInternalFrame {
                     .addComponent(tFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
+                    .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lBRegional)
+                    .addComponent(lBTelefonoPersonal)
+                    .addComponent(lBEMailPersona))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cBCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFEMailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
+                    .addComponent(lBFechaIngreso)
+                    .addComponent(lBFechaRetiro)
+                    .addComponent(lBCargo)
+                    .addComponent(lBSalario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFFechaRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cBCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cBSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lBEmpleadoId)
+                    .addComponent(lBIdEmpleado)
                     .addComponent(lBusuarioEmpleado)
                     .addComponent(jLabel20)
                     .addComponent(lbEMailEmpresa))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tFEmpleadoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lBContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(26, 26, 26)
                 .addComponent(JBGrabar)
-                .addGap(28, 28, 28))
+                .addGap(22, 22, 22))
         );
 
-        lBEmpleadoId.getAccessibleContext().setAccessibleParent(tFEmpleadoId);
+        lBIdEmpleado.getAccessibleContext().setAccessibleParent(tFEmpleadoId);
         lBusuarioEmpleado.getAccessibleContext().setAccessibleParent(tFUsuario);
         jLabel20.getAccessibleContext().setAccessibleParent(lBContraseña);
         lbEMailEmpresa.getAccessibleContext().setAccessibleParent(lBContraseña);
@@ -501,68 +511,134 @@ public class IFempleado extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGrabarActionPerformed
-        try{
-            tFEmpleadoId.setText(crearEmpeadoId());
-            tFUsuario.setText(crearUsuario());
-            tFEMailEmpresa.setText(crearCorreoEmpresa());
-            lBContraseña.setText(crearClaveUsuario());
-            controlEmpleado.crearEmpleado(crearNuevoEmpleado());
-            mensajesConfirmacion mensaje = new mensajesConfirmacion();
-            boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
-            if(opcion ==true){              
-              controlEmpleado.crearEmpleado(crearNuevoEmpleado());
-            }
+        try{    
+            if (ValidarVacios()==true){
+                JOptionPane.showMessageDialog(null,"Datos incompletos");
+            }if(!camposTexto()==true){
+                JOptionPane.showMessageDialog(null,"Datos incorrectos T");
+            }if(!camposNumericos()==true){
+                JOptionPane.showMessageDialog(null,"Datosincorrectos N");
+            }if(!campoFecha()==true){
+                JOptionPane.showMessageDialog(null,"Formato incorrectos");
+                } else {
+                controlEmpleado.crearEmpleado(crearNuevoEmpleado());
+                tFEmpleadoId.setText(crearEmpeadoId());
+                tFUsuario.setText(crearUsuario());
+                lBContraseña.setText(crearClaveUsuario());
+                tFEMailEmpresa.setText(crearCorreoEmpresa());
+                mensajesConfirmacion mensaje = new mensajesConfirmacion();
+                boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
+                    if(opcion ==true){              
+                    controlEmpleado.crearEmpleado(crearNuevoEmpleado());
+                    }
+                }    
             }catch(Exception e){
                 System.out.println("btGrbar "+e.getMessage());    
                 }
     }//GEN-LAST:event_JBGrabarActionPerformed
 
+    private void tFNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNombre1KeyTyped
+        if(tFNombre1.getText().length() >= 20)
+        {
+        evt.consume();
+        }
+    }//GEN-LAST:event_tFNombre1KeyTyped
+
+    private void tfNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombre2KeyTyped
+        if(tfNombre2.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tfNombre2KeyTyped
+
+    private void tFApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFApellido1KeyTyped
+        if(tFApellido1.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFApellido1KeyTyped
+
+    private void tFApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFApellido2KeyTyped
+         if(tFApellido2.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFApellido2KeyTyped
+
+    private void tFNumeroIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNumeroIdentificacionKeyTyped
+         if(tFNumeroIdentificacion.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFNumeroIdentificacionKeyTyped
+
+    private void tFDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFDireccionKeyTyped
+         if(tFDireccion.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFDireccionKeyTyped
+
+    private void tFTelefonoPersonalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFTelefonoPersonalKeyTyped
+        if(tFTelefonoPersonal.getText().length() >= 10)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFTelefonoPersonalKeyTyped
+
+    private void tFEMailPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFEMailPersonaKeyTyped
+         if(tFEMailPersona.getText().length() >= 20)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_tFEMailPersonaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGrabar;
+    private javax.swing.JLabel LBFechaNacimiento;
     private javax.swing.JComboBox<String> cBCargo;
     private javax.swing.JComboBox<String> cBCiudadPersona;
     private javax.swing.JComboBox<String> cBDocumento;
     private javax.swing.JComboBox<String> cBRegional;
     private javax.swing.JComboBox<String> cBSalario;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lBApellido1;
+    private javax.swing.JLabel lBApellido2;
+    private javax.swing.JLabel lBCargo;
+    private javax.swing.JLabel lBCiudad;
     private javax.swing.JTextField lBContraseña;
-    private javax.swing.JLabel lBEmpleadoId;
+    private javax.swing.JLabel lBDireccion;
+    private javax.swing.JLabel lBEMailPersona;
+    private javax.swing.JLabel lBFechaIngreso;
+    private javax.swing.JLabel lBFechaRetiro;
+    private javax.swing.JLabel lBIdEmpleado;
+    private javax.swing.JLabel lBNombre1;
+    private javax.swing.JLabel lBNumeroDocumento;
+    private javax.swing.JLabel lBRegional;
+    private javax.swing.JLabel lBSalario;
+    private javax.swing.JLabel lBTelefonoPersonal;
+    private javax.swing.JLabel lBTipoDocumento;
     private javax.swing.JLabel lBusuarioEmpleado;
     private javax.swing.JLabel lbEMailEmpresa;
+    private javax.swing.JLabel lbNombre2;
     private javax.swing.JTextField tFApellido1;
     private javax.swing.JTextField tFApellido2;
     private javax.swing.JTextField tFDireccion;

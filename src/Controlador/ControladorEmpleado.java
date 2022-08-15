@@ -6,7 +6,6 @@ package Controlador;
 
 import Clases.Empleado;
 import Mobelo.ModeloEmpleado;
-import Vista.IFempleado;
 
 /**
  *
