@@ -557,6 +557,16 @@ public class IFempleado extends javax.swing.JInternalFrame {
         {
         evt.consume();
         }
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+       {
+           evt.consume();
+       }
     }//GEN-LAST:event_tFNombre1KeyTyped
 
     private void tfNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombre2KeyTyped
@@ -564,6 +574,16 @@ public class IFempleado extends javax.swing.JInternalFrame {
     {
         evt.consume();
     }
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+       {
+           evt.consume();
+       }
     }//GEN-LAST:event_tfNombre2KeyTyped
 
     private void tFApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFApellido1KeyTyped
@@ -571,6 +591,16 @@ public class IFempleado extends javax.swing.JInternalFrame {
     {
         evt.consume();
     }
+        int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+       {
+           evt.consume();
+       }
     }//GEN-LAST:event_tFApellido1KeyTyped
 
     private void tFApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFApellido2KeyTyped
@@ -578,13 +608,34 @@ public class IFempleado extends javax.swing.JInternalFrame {
     {
         evt.consume();
     }
+         int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+        if (!(minusculas || mayusculas || espacio))
+       {
+           evt.consume();
+       }
     }//GEN-LAST:event_tFApellido2KeyTyped
 
     private void tFNumeroIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNumeroIdentificacionKeyTyped
          if(tFNumeroIdentificacion.getText().length() >= 20)
     {
         evt.consume();
-    }
+    }  
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+        
+        if (!numeros)
+        {
+            evt.consume();
+        }
+        if (tFNombre1.getText().trim().length() == 10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_tFNumeroIdentificacionKeyTyped
 
     private void tFDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFDireccionKeyTyped
@@ -599,6 +650,18 @@ public class IFempleado extends javax.swing.JInternalFrame {
     {
         evt.consume();
     }
+        
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+        
+        if (!numeros)
+        {
+            evt.consume();
+        }
+        if (tFNombre1.getText().trim().length() == 10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_tFTelefonoPersonalKeyTyped
 
     private void tFEMailPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFEMailPersonaKeyTyped
