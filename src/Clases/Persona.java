@@ -33,9 +33,6 @@ public class Persona {
         this.ciudad = ciudad;
         this.telefono = telefono;
         this.eMail = eMail;
-    
-    
-    
     }   
 
     /**

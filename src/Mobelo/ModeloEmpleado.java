@@ -24,7 +24,6 @@ public class ModeloEmpleado {
     }
     
     public boolean crearNuevoEmpleado(Empleado nE){
-         
         try(Connection conn = DriverManager.getConnection(cx.getUrl(), cx.getUser(), cx.getPassword())){
             String query ="INSERT INTO Persona (tipoIdPersona,numeroIdPersona,nombre1,nombre2,apellido1,apellido2,"
                     + "fechaNacimiento,direccion,ciudad,telefono,eMail) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -63,7 +62,5 @@ public class ModeloEmpleado {
             System.out.println("modelo " + ex);           
         }      
         return false;
-        
     }   
-    
 }

@@ -17,7 +17,6 @@ public class ControladorEmpleado {
     
     public boolean crearEmpleado(Empleado nuevo){ 
     try{    
-//        Empleado nuevo = formulario.crearNuevoEmpleado();
         modelo.crearNuevoEmpleado(nuevo);
         return true;
         }catch(Exception e){
