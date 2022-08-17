@@ -5,8 +5,10 @@
 package Vista;
 
 import Clases.Empleado;
+import Controlador.ControladorCiudad;
 import Controlador.ControladorEmpleado;
-import Controlador.mensajesConfirmacion;
+import Controlador.MensajesConfirmacion;
+import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 
@@ -18,12 +20,16 @@ public class IFempleado extends javax.swing.JInternalFrame {
     
     
     ControladorEmpleado controlEmpleado = new ControladorEmpleado();
+    ControladorCiudad controlCiudad = new ControladorCiudad();
+    
+    
     
     /**
      * Creates new form IFempleado
      */
     public IFempleado() {
         initComponents();
+        this.listaCiudadesRegistradas();
     }
 
     public Empleado crearNuevoEmpleado(){
@@ -63,13 +69,17 @@ public class IFempleado extends javax.swing.JInternalFrame {
                cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty();
     }
     
-    private boolean camposNumericos(){
-        return tFNumeroIdentificacion.getText().matches("[1-9]*")&&tFTelefonoPersonal.getText().matches("[1-9]*");
-    }
-    
-    private boolean camposTexto(){
-        return tFApellido1.getText().matches("[a-zA-Z]*")&&tFApellido2.getText().matches("[a-zA-Z]*")&&tFNombre1.getText().matches("[a-zA-Z]*")&&tfNombre2.getText().matches("[a-zA-Z]*");
-    }
+    private void listaCiudadesRegistradas(){
+        try{    
+            LinkedList<LinkedList> ciudades = controlCiudad.listadoCiudadesRegistradas();
+            for(LinkedList ciudad :ciudades){
+                LinkedList<String> ciu = ciudad;
+                cBCiudadPersona.addItem(ciu.get(1)+" "+ciu.get(2));
+            }
+        }catch(Exception e){
+        System.out.println("formulario ciudad "+e.getMessage());
+        }
+    }    
     
     private boolean campoFecha(){
         return tFFechaIngreso.getText().matches("\\d{2}-\\d{2}-\\d{4}$")&&tFFechaNacimiento.getText().matches("\\d{2}-\\d{2}-\\d{4}$");
@@ -215,7 +225,11 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
         });
 
-        cBCiudadPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBCiudadPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBCiudadPersonaActionPerformed(evt);
+            }
+        });
 
         tFFechaNacimiento.setText("DD-MM-AAAA");
 
@@ -528,11 +542,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private void JBGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGrabarActionPerformed
         try{    
             if (ValidarVacios()==true){
-                JOptionPane.showMessageDialog(null,"Datos incompletos");
-            }if(!camposTexto()==true){
-                JOptionPane.showMessageDialog(null,"Datos incorrectos T");
-            }if(!camposNumericos()==true){
-                JOptionPane.showMessageDialog(null,"Datosincorrectos N");
+                JOptionPane.showMessageDialog(null,"Datos incompletos");            
             }if(!campoFecha()==true){
                 JOptionPane.showMessageDialog(null,"Formato incorrectos");
                 } else {
@@ -541,15 +551,15 @@ public class IFempleado extends javax.swing.JInternalFrame {
                 tFUsuario.setText(crearUsuario());
                 lBContraseña.setText(crearClaveUsuario());
                 tFEMailEmpresa.setText(crearCorreoEmpresa());
-                mensajesConfirmacion mensaje = new mensajesConfirmacion();
+                MensajesConfirmacion mensaje = new MensajesConfirmacion();
                 boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
                     if(opcion ==true){              
                     controlEmpleado.crearEmpleado(crearNuevoEmpleado());
                     }
                 }    
             }catch(Exception e){
-                System.out.println("btGrbar "+e.getMessage());    
-                }
+                System.out.println("btGrbar "+e.getMessage());  
+            }
     }//GEN-LAST:event_JBGrabarActionPerformed
 
     private void tFNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNombre1KeyTyped
@@ -670,6 +680,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
         evt.consume();
     }
     }//GEN-LAST:event_tFEMailPersonaKeyTyped
+
+    private void cBCiudadPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBCiudadPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBCiudadPersonaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
