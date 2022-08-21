@@ -309,9 +309,6 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBCiudadPersonaActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -320,6 +317,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="DD-MM-AAAA"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tFFechaNacimientoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tFDireccion">
           <Events>
@@ -356,12 +356,18 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="DD-MM-AAAA"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tFFechaIngresoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tFFechaRetiro">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="AA-MM-AAAA"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tFFechaRetiroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cBCargo">
           <Properties>

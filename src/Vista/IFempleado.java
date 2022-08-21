@@ -5,9 +5,11 @@
 package Vista;
 
 import Clases.Empleado;
+import Clases.ciudad;
 import Controlador.ControladorCiudad;
 import Controlador.ControladorEmpleado;
 import Controlador.MensajesConfirmacion;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
@@ -18,11 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class IFempleado extends javax.swing.JInternalFrame {
     
-    
     ControladorEmpleado controlEmpleado = new ControladorEmpleado();
     ControladorCiudad controlCiudad = new ControladorCiudad();
-    
-    
     
     /**
      * Creates new form IFempleado
@@ -42,7 +41,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
             String numeroidentificacion = tFNumeroIdentificacion.getText();
             String fechaNacimiento = tFFechaNacimiento.getText();
             String direccion = tFDireccion.getText();
-            String ciudad = cBCiudadPersona.getSelectedItem().toString();
+            String string = (String) cBCiudadPersona.getSelectedItem();
+            String[] dividir = string.split("-");
+            String numCiudad = dividir[2];
+            ciudad ciudad = controlCiudad.buscarCiudad(numCiudad);
             String regional = cBRegional.getSelectedItem().toString();
             String telefonoPersona = tFTelefonoPersonal.getText();
             String eMailPersona = tFEMailPersona.getText();
@@ -71,18 +73,18 @@ public class IFempleado extends javax.swing.JInternalFrame {
     
     private void listaCiudadesRegistradas(){
         try{    
-            LinkedList<LinkedList> ciudades = controlCiudad.listadoCiudadesRegistradas();
-            for(LinkedList ciudad :ciudades){
-                LinkedList<String> ciu = ciudad;
-                cBCiudadPersona.addItem(ciu.get(1)+" "+ciu.get(2));
-            }
+            LinkedList<ciudad> ciudades = controlCiudad.listadoCiudadesRegistradas();
+            for(ciudad ciudad :ciudades){
+               cBCiudadPersona.addItem(ciudad.getCiudad()+"-"+ciudad.getDepartamento()+"-"+ciudad.getNumCiudad());
+                }
         }catch(Exception e){
         System.out.println("formulario ciudad "+e.getMessage());
         }
     }    
     
     private boolean campoFecha(){
-        return tFFechaIngreso.getText().matches("\\d{2}-\\d{2}-\\d{4}$")&&tFFechaNacimiento.getText().matches("\\d{2}-\\d{2}-\\d{4}$");
+        return true;
+//                tFFechaIngreso.getText().matches("\\d{4}-\\d{2}-\\d{2}$")&&tFFechaNacimiento.getText().matches("\\d{4}-\\d{2}-\\d{2}$");
     }
     
     private String crearEmpeadoId(){
@@ -114,8 +116,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     
     private String crearCorreoEmpresa(){
         try{
-            String nombre = crearUsuario();
-            String eMailEmpresa = nombre+"@empresa.com";
+            String eMailEmpresa = crearUsuario()+"@empresa.com";
             return eMailEmpresa;
         }catch(Exception e){
             System.out.println("crearCorreoEmpresa "+ e);
@@ -225,13 +226,12 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
         });
 
-        cBCiudadPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cBCiudadPersonaActionPerformed(evt);
+        tFFechaNacimiento.setText("DD-MM-AAAA");
+        tFFechaNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFFechaNacimientoKeyTyped(evt);
             }
         });
-
-        tFFechaNacimiento.setText("DD-MM-AAAA");
 
         tFDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -254,9 +254,19 @@ public class IFempleado extends javax.swing.JInternalFrame {
         cBRegional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Norte", "Sur", "Oriente", "Occidente" }));
 
         tFFechaIngreso.setText("DD-MM-AAAA");
+        tFFechaIngreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFFechaIngresoKeyTyped(evt);
+            }
+        });
 
         tFFechaRetiro.setEditable(false);
         tFFechaRetiro.setText("AA-MM-AAAA");
+        tFFechaRetiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFFechaRetiroKeyTyped(evt);
+            }
+        });
 
         cBCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Tecnico", "Analista", "Mensajero" }));
 
@@ -546,11 +556,11 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }if(!campoFecha()==true){
                 JOptionPane.showMessageDialog(null,"Formato incorrectos");
                 } else {
-                controlEmpleado.crearEmpleado(crearNuevoEmpleado());
                 tFEmpleadoId.setText(crearEmpeadoId());
                 tFUsuario.setText(crearUsuario());
                 lBContraseña.setText(crearClaveUsuario());
                 tFEMailEmpresa.setText(crearCorreoEmpresa());
+                controlEmpleado.crearEmpleado(this.crearNuevoEmpleado());
                 MensajesConfirmacion mensaje = new MensajesConfirmacion();
                 boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
                     if(opcion ==true){              
@@ -681,9 +691,26 @@ public class IFempleado extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_tFEMailPersonaKeyTyped
 
-    private void cBCiudadPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBCiudadPersonaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cBCiudadPersonaActionPerformed
+    private void tFFechaNacimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFFechaNacimientoKeyTyped
+        if(tFApellido2.getText().length() >= 10)
+            {
+        evt.consume();
+        }
+    }//GEN-LAST:event_tFFechaNacimientoKeyTyped
+
+    private void tFFechaIngresoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFFechaIngresoKeyTyped
+        if(tFApellido2.getText().length() >= 10)
+            {
+        evt.consume();
+        }
+    }//GEN-LAST:event_tFFechaIngresoKeyTyped
+
+    private void tFFechaRetiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFFechaRetiroKeyTyped
+        if(tFApellido2.getText().length() >= 10)
+            {
+        evt.consume();
+        }
+    }//GEN-LAST:event_tFFechaRetiroKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

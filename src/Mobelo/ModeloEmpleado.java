@@ -39,7 +39,7 @@ public class ModeloEmpleado {
             stm.setString(6,nE.getApellido2());
             stm.setString(7,nE.getFechaNacimiento());
             stm.setString(8,nE.getDireccion());
-            stm.setString(9,nE.getCiudad());
+            stm.setString(9,nE.getCiudad().getNumCiudad());
             stm.setString(10,nE.getTelefono());
             stm.setString(11,nE.geteMail());
             stm1.setString(1,nE.getNumeroIdPersona());

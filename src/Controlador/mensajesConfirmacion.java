@@ -24,7 +24,7 @@ public class MensajesConfirmacion {
                                                          """+
                 em.getNombre1()+" - "+em.getNombre2()+"\n"+em.getApellido1()+" - "+em.getApellido2()+
                 "\n"+em.geteMail()+" - "+em.getTipoIdPersona()+"\n"+em.getNumeroIdPersona()+" - "+
-                em.getTelefono()+"\n"+ em.getFechaNacimiento()+" - "+em.getDireccion()+"\n"+em.getCiudad()+" - "+
+                em.getTelefono()+"\n"+ em.getFechaNacimiento()+" - "+em.getDireccion()+"\n"+em.getCiudad().getCiudad()+" - "+
                 em.getRegional()+"\n"+em.getCargo()+" - "+em.getSalario()+"\n"+em.getFechaIngreso()+" - "+
                 em.getEmpleadoId()+"\n"+em.getUsuario()+" - "+em.getCorreoEmpresarial());
         
