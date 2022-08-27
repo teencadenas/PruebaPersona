@@ -19,7 +19,7 @@ public class Empleado extends Persona{
     private String contraseña;
     private String correoEmpresarial;
 
-    public Empleado(String empleadoId, String fechaIngreso, String fechaRetiro, String cargo, String regional, String salario, String usuario, String contraseña, String correoEmpresarial, String tipoIdPersona, String numeroIdPersona, String nombre1, String nombre2, String apellido1, String apellido2, String fechaNacimiento, String direccion, Clases.ciudad ciudad, String telefono, String eMail) {
+    public Empleado(String empleadoId, String fechaIngreso, String fechaRetiro, String cargo, String regional, String salario, String usuario, String contraseña, String correoEmpresarial, String tipoIdPersona, String numeroIdPersona, String nombre1, String nombre2, String apellido1, String apellido2, String fechaNacimiento, String direccion, Clases.Ciudad ciudad, String telefono, String eMail) {
         super(tipoIdPersona, numeroIdPersona, nombre1, nombre2, apellido1, apellido2, fechaNacimiento, direccion, ciudad, telefono, eMail);
         this.empleadoId = empleadoId;
         this.fechaIngreso = fechaIngreso;

@@ -8,11 +8,11 @@ package Clases;
  *
  * @author teenc
  */
-public class ciudad {
+public class Ciudad {
     
     private String region,numDepto,departamento,numCiudad,ciudad;
 
-    public ciudad(String region, String numDepto, String departamento, String numCiudad, String ciudad) {
+    public Ciudad(String region, String numDepto, String departamento, String numCiudad, String ciudad) {
         this.region = region;
         this.numDepto = numDepto;
         this.departamento = departamento;

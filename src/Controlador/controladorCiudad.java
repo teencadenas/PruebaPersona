@@ -4,7 +4,7 @@
  */
 package Controlador;
 
-import Clases.ciudad;
+import Clases.Ciudad;
 import Mobelo.ModeloCiudad;
 import java.util.LinkedList;
 
@@ -16,9 +16,9 @@ public class ControladorCiudad {
     
     ModeloCiudad modeloCiudad = new ModeloCiudad();
     
-    public LinkedList<ciudad> listadoCiudadesRegistradas(){
+    public LinkedList<Ciudad> listadoCiudadesRegistradas(String str){
         try{
-           LinkedList<ciudad> ciudades = modeloCiudad.listaCiudadesRegistrdas();
+           LinkedList<Ciudad> ciudades = modeloCiudad.listaCiudadesRegistrdas(str);
            return ciudades;
         }catch(Exception e){
            System.out.println("Controlador a " +e.getMessage());    
@@ -26,14 +26,13 @@ public class ControladorCiudad {
         }
     } 
     
-    public ciudad buscarCiudad(String num){
+    public Ciudad buscarCiudad(String str){
         try{
-            ciudad city = modeloCiudad.buscarCiudad(num);
+            Ciudad city = modeloCiudad.buscarCiudad(str);
             return city;
         }catch(Exception e){
             System.out.println("Control "+e);
             return null;
         }
-    }
-    
+    }    
 }

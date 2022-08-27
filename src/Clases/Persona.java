@@ -17,11 +17,11 @@ public class Persona {
     private String apellido2;
     private String fechaNacimiento;
     private String direccion;
-    private ciudad ciudad;
+    private Ciudad ciudad;
     private String telefono;
     private String eMail;
 
-    public Persona(String tipoIdPersona, String numeroIdPersona, String nombre1, String nombre2, String apellido1, String apellido2, String fechaNacimiento, String direccion, ciudad ciudad, String telefono, String eMail) {
+    public Persona(String tipoIdPersona, String numeroIdPersona, String nombre1, String nombre2, String apellido1, String apellido2, String fechaNacimiento, String direccion, Ciudad ciudad, String telefono, String eMail) {
         this.tipoIdPersona = tipoIdPersona;
         this.numeroIdPersona = numeroIdPersona;
         this.nombre1 = nombre1;
@@ -150,14 +150,14 @@ public class Persona {
     /**
      * @return the ciudad
      */
-    public ciudad getCiudad() {
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
     /**
      * @param ciudad the ciudad to set
      */
-    public void setCiudad(ciudad ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 
