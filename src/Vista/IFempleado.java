@@ -5,11 +5,10 @@
 package Vista;
 
 import Clases.Empleado;
-import Clases.ciudad;
+import Clases.Ciudad;
 import Controlador.ControladorCiudad;
 import Controlador.ControladorEmpleado;
 import Controlador.MensajesConfirmacion;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
@@ -28,7 +27,6 @@ public class IFempleado extends javax.swing.JInternalFrame {
      */
     public IFempleado() {
         initComponents();
-        this.listaCiudadesRegistradas();
     }
 
     public Empleado crearNuevoEmpleado(){
@@ -44,7 +42,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
             String string = (String) cBCiudadPersona.getSelectedItem();
             String[] dividir = string.split("-");
             String numCiudad = dividir[2];
-            ciudad ciudad = controlCiudad.buscarCiudad(numCiudad);
+            Ciudad ciudad = controlCiudad.buscarCiudad(numCiudad);
             String regional = cBRegional.getSelectedItem().toString();
             String telefonoPersona = tFTelefonoPersonal.getText();
             String eMailPersona = tFEMailPersona.getText();
@@ -53,7 +51,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
             String salario = cBSalario.getSelectedItem().toString();
             String empleadoId = tFEmpleadoId.getText();
             String usuario = tFUsuario.getText();
-            String contraseña = lBContraseña.getText();
+            String contraseña = tbContraseña.getText();
             String eMailEmpresa = tFEMailEmpresa.getText();
             Empleado nuevo = new Empleado(empleadoId, fechaIngreso,"N/A", cargo, regional, salario, usuario, contraseña, eMailEmpresa, identificacion, numeroidentificacion, nombre1, nombre2, apellido1, apellido2, fechaNacimiento, direccion, ciudad, telefonoPersona, eMailPersona);
             return nuevo;
@@ -64,23 +62,34 @@ public class IFempleado extends javax.swing.JInternalFrame {
     }
     
     private boolean ValidarVacios(){
-        return tFApellido2.getText().trim().isEmpty()&&tFApellido1.getText().trim().isEmpty()&&tFApellido1.getText().trim().isEmpty()&&lBContraseña.getText().trim().isEmpty()&&tFDireccion.getText().trim().isEmpty()&&
-               tFEMailEmpresa.getText().trim().isEmpty()&&tFEMailPersona.getText().trim().isEmpty()&&tFEmpleadoId.getText().trim().isEmpty()&&tFFechaIngreso.getText().trim().isEmpty()&&tFFechaNacimiento.getText().trim().isEmpty()&&
-               tFFechaRetiro.getText().trim().isEmpty()&&tFNombre1.getText().trim().isEmpty()&&tFNumeroIdentificacion.getText().trim().isEmpty()&&tFTelefonoPersonal.getText().trim().isEmpty()&&tFUsuario.getText().trim().isEmpty()&&
-               tfNombre2.getText().trim().isEmpty()&&cBCargo.getSelectedItem().toString().trim().isEmpty()&&cBCiudadPersona.getSelectedItem().toString().trim().isEmpty()&&cBDocumento.getSelectedItem().toString().trim().isEmpty()&&
-               cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty();
-    }
-    
-    private void listaCiudadesRegistradas(){
-        try{    
-            LinkedList<ciudad> ciudades = controlCiudad.listadoCiudadesRegistradas();
-            for(ciudad ciudad :ciudades){
-               cBCiudadPersona.addItem(ciudad.getCiudad()+"-"+ciudad.getDepartamento()+"-"+ciudad.getNumCiudad());
-                }
+        try{
+            return tFApellido2.getText().trim().isEmpty()&&tFApellido1.getText().trim().isEmpty()&&tFApellido1.getText().trim().isEmpty()&&tbContraseña.getText().trim().isEmpty()&&tFDireccion.getText().trim().isEmpty()&&
+                   tFEMailEmpresa.getText().trim().isEmpty()&&tFEMailPersona.getText().trim().isEmpty()&&tFEmpleadoId.getText().trim().isEmpty()&&tFFechaIngreso.getText().trim().isEmpty()&&tFFechaNacimiento.getText().trim().isEmpty()&&
+                   tFFechaRetiro.getText().trim().isEmpty()&&tFNombre1.getText().trim().isEmpty()&&tFNumeroIdentificacion.getText().trim().isEmpty()&&tFTelefonoPersonal.getText().trim().isEmpty()&&tFUsuario.getText().trim().isEmpty()&&
+                   tfNombre2.getText().trim().isEmpty()&&cBCargo.getSelectedItem().toString().trim().isEmpty()&&cBCiudadPersona.getSelectedItem().toString().trim().isEmpty()&&cBDocumento.getSelectedItem().toString().trim().isEmpty()&&
+                   cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty();
         }catch(Exception e){
-        System.out.println("formulario ciudad "+e.getMessage());
+            System.out.println("Vista validar vacios "+ e);
         }
-    }    
+        return false;
+    }
+      
+    
+    private void buscarCiudadComboBoxCiudad(){
+        try{
+            String str1 = tFBuscarCiudad.getText().trim();
+            String str2 = str1.substring(0, 1).toUpperCase();
+            String str3 = str1.substring(1).toLowerCase();
+            String str = str2+str3;
+            cBCiudadPersona.removeAllItems();
+            LinkedList<Ciudad> ciudades  = controlCiudad.listadoCiudadesRegistradas("%"+str+"%");
+            for(Ciudad ciudad :ciudades){
+                cBCiudadPersona.addItem(ciudad.getCiudad()+"-"+ciudad.getDepartamento()+"-"+ciudad.getNumCiudad());
+            }    
+        }catch(Exception e){
+         System.out.println("formulario ciudad "+e.getMessage());   
+        }
+    }
     
     private boolean campoFecha(){
         return true;
@@ -165,7 +174,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
         cBSalario = new javax.swing.JComboBox<>();
         tFEmpleadoId = new javax.swing.JTextField();
         tFUsuario = new javax.swing.JTextField();
-        lBContraseña = new javax.swing.JTextField();
+        tbContraseña = new javax.swing.JTextField();
         tFEMailEmpresa = new javax.swing.JTextField();
         lBNombre1 = new javax.swing.JLabel();
         lbNombre2 = new javax.swing.JLabel();
@@ -188,6 +197,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
         lBusuarioEmpleado = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         lbEMailEmpresa = new javax.swing.JLabel();
+        tFBuscarCiudad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -276,7 +286,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
 
         tFUsuario.setEditable(false);
 
-        lBContraseña.setEditable(false);
+        tbContraseña.setEditable(false);
 
         tFEMailEmpresa.setEditable(false);
 
@@ -347,6 +357,12 @@ public class IFempleado extends javax.swing.JInternalFrame {
         lbEMailEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbEMailEmpresa.setText("E-MAIL EMPRESA");
 
+        tFBuscarCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tFBuscarCiudadKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -354,6 +370,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lBEMailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -365,19 +385,20 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(tFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lBTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lBEMailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cBCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tFTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(106, 106, 106)
+                                        .addComponent(tFBuscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lBTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cBCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tFTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(tFEMailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -402,7 +423,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(lbEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lBContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -474,12 +495,14 @@ public class IFempleado extends javax.swing.JInternalFrame {
                     .addComponent(tFNumeroIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lBRegional)
-                    .addComponent(lBTelefonoPersonal)
-                    .addComponent(lBEMailPersona))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lBTelefonoPersonal)
+                        .addComponent(lBEMailPersona)
+                        .addComponent(tFBuscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cBCiudadPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,7 +531,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tFEmpleadoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lBContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(JBGrabar)
@@ -517,8 +540,8 @@ public class IFempleado extends javax.swing.JInternalFrame {
 
         lBIdEmpleado.getAccessibleContext().setAccessibleParent(tFEmpleadoId);
         lBusuarioEmpleado.getAccessibleContext().setAccessibleParent(tFUsuario);
-        jLabel20.getAccessibleContext().setAccessibleParent(lBContraseña);
-        lbEMailEmpresa.getAccessibleContext().setAccessibleParent(lBContraseña);
+        jLabel20.getAccessibleContext().setAccessibleParent(tbContraseña);
+        lbEMailEmpresa.getAccessibleContext().setAccessibleParent(tbContraseña);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel1.setText("GESTION EMPLEADOS");
@@ -558,13 +581,14 @@ public class IFempleado extends javax.swing.JInternalFrame {
                 } else {
                 tFEmpleadoId.setText(crearEmpeadoId());
                 tFUsuario.setText(crearUsuario());
-                lBContraseña.setText(crearClaveUsuario());
+                tbContraseña.setText(crearClaveUsuario());
                 tFEMailEmpresa.setText(crearCorreoEmpresa());
                 controlEmpleado.crearEmpleado(this.crearNuevoEmpleado());
                 MensajesConfirmacion mensaje = new MensajesConfirmacion();
                 boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
                     if(opcion ==true){              
                     controlEmpleado.crearEmpleado(crearNuevoEmpleado());
+                    limpiarFormulario();
                     }
                 }    
             }catch(Exception e){
@@ -572,6 +596,33 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_JBGrabarActionPerformed
 
+    
+    private void limpiarFormulario(){
+        tFApellido1.setText("");
+        tFApellido2.setText("");
+        tFBuscarCiudad.setText("");
+        tFDireccion.setText("");
+        tFEMailEmpresa.setText("");
+        tFEMailPersona.setText("");
+        tFEmpleadoId.setText("");
+        tFFechaIngreso.setText("DD-MM-AAA");
+        tFFechaNacimiento.setText("DD-MM-AAA");
+        tFFechaRetiro.setText("DD-MM-AAA");
+        tFNombre1.setText("");
+        tFNumeroIdentificacion.setText("");
+        tFTelefonoPersonal.setText("");
+        tFUsuario.setText("");
+        tfNombre2.setText("");
+        tbContraseña.setText("");
+        cBCargo.removeAllItems();
+        cBCiudadPersona.removeAllItems();
+        cBDocumento.removeAllItems();
+        cBRegional.removeAllItems();
+        cBSalario.removeAllItems();
+    }
+    
+    
+    
     private void tFNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNombre1KeyTyped
         if(tFNombre1.getText().length() >= 20)
         {
@@ -712,6 +763,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tFFechaRetiroKeyTyped
 
+    private void tFBuscarCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFBuscarCiudadKeyTyped
+        buscarCiudadComboBoxCiudad();
+    }//GEN-LAST:event_tFBuscarCiudadKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGrabar;
@@ -728,7 +783,6 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lBApellido2;
     private javax.swing.JLabel lBCargo;
     private javax.swing.JLabel lBCiudad;
-    private javax.swing.JTextField lBContraseña;
     private javax.swing.JLabel lBDireccion;
     private javax.swing.JLabel lBEMailPersona;
     private javax.swing.JLabel lBFechaIngreso;
@@ -745,6 +799,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbNombre2;
     private javax.swing.JTextField tFApellido1;
     private javax.swing.JTextField tFApellido2;
+    private javax.swing.JTextField tFBuscarCiudad;
     private javax.swing.JTextField tFDireccion;
     private javax.swing.JTextField tFEMailEmpresa;
     private javax.swing.JTextField tFEMailPersona;
@@ -756,6 +811,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tFNumeroIdentificacion;
     private javax.swing.JTextField tFTelefonoPersonal;
     private javax.swing.JTextField tFUsuario;
+    private javax.swing.JTextField tbContraseña;
     private javax.swing.JTextField tfNombre2;
     // End of variables declaration//GEN-END:variables
 }
