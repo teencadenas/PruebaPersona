@@ -64,7 +64,7 @@ public class JFInicial extends javax.swing.JFrame {
 
         menuEmpleado.setText("Empleado");
 
-        CargarJPEmpleado.setText("Editar");
+        CargarJPEmpleado.setText("Empleado");
         CargarJPEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargarJPEmpleadoActionPerformed(evt);
