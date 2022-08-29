@@ -28,6 +28,36 @@ public class IFempleado extends javax.swing.JInternalFrame {
     public IFempleado() {
         initComponents();
     }
+    
+    
+    public void buscarEmpleado(){
+        try{
+            String str = tFNumeroIdentificacion.getText();
+            Empleado empleado = controlEmpleado.buscarEmpleado(str);
+            tFApellido1.setText(empleado.getApellido1());
+            tFApellido2.setText(empleado.getApellido2());
+            tFBuscarCiudad.setText(empleado.ciudad.getCiudad());
+            tFDireccion.setText(empleado.getDireccion());
+            tFEMailEmpresa.setText(empleado.getCorreoEmpresarial());
+            tFEMailPersona.setText(empleado.geteMail());
+            tFEmpleadoId.setText(empleado.getEmpleadoId());
+            tFFechaIngreso.setText(empleado.getFechaIngreso());
+            tFFechaNacimiento.setText(empleado.getFechaNacimiento());
+            tFFechaRetiro.setText(empleado.getFechaRetiro());
+            tFNombre1.setText(empleado.getNombre1());
+            tFNumeroIdentificacion.setText(empleado.getNumeroIdPersona());
+            tFTelefonoPersonal.setText(empleado.getTelefono());
+            tFUsuario.setText(empleado.getUsuario());
+            tfNombre2.setText(empleado.getNombre2());
+            tbContraseña.setText(empleado.getContraseña());
+            cBCargo.setSelectedItem(empleado.getCargo());
+            cBDocumento.setSelectedItem(empleado.getTipoIdPersona());
+            cBRegional.setSelectedItem(empleado.getRegional());
+            cBSalario.setSelectedItem(empleado.getTelefono());
+        }catch(Exception e){
+            System.out.println("vista "+e.getMessage());
+        }  
+    }
 
     public Empleado crearNuevoEmpleado(){
         try{
@@ -67,14 +97,14 @@ public class IFempleado extends javax.swing.JInternalFrame {
                    tFEMailEmpresa.getText().trim().isEmpty()&&tFEMailPersona.getText().trim().isEmpty()&&tFEmpleadoId.getText().trim().isEmpty()&&tFFechaIngreso.getText().trim().isEmpty()&&tFFechaNacimiento.getText().trim().isEmpty()&&
                    tFFechaRetiro.getText().trim().isEmpty()&&tFNombre1.getText().trim().isEmpty()&&tFNumeroIdentificacion.getText().trim().isEmpty()&&tFTelefonoPersonal.getText().trim().isEmpty()&&tFUsuario.getText().trim().isEmpty()&&
                    tfNombre2.getText().trim().isEmpty()&&cBCargo.getSelectedItem().toString().trim().isEmpty()&&cBCiudadPersona.getSelectedItem().toString().trim().isEmpty()&&cBDocumento.getSelectedItem().toString().trim().isEmpty()&&
-                   cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty();
+                   cBRegional.getSelectedItem().toString().trim().isEmpty()&&cBSalario.getSelectedItem().toString().trim().isEmpty()&&cBDocumento.getSelectedItem().equals("-")&&cBCargo.getSelectedItem().equals("-")&&cBCiudadPersona.getSelectedItem().equals("-")
+                   &&cBRegional.getSelectedItem().equals("-");
         }catch(Exception e){
             System.out.println("Vista validar vacios "+ e);
         }
         return false;
     }
       
-    
     private void buscarCiudadComboBoxCiudad(){
         try{
             String str1 = tFBuscarCiudad.getText().trim();
@@ -198,11 +228,18 @@ public class IFempleado extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         lbEMailEmpresa = new javax.swing.JLabel();
         tFBuscarCiudad = new javax.swing.JTextField();
+        jBtBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setAutoscrolls(true);
+        setEnabled(false);
+        setFocusCycleRoot(false);
+        setFocusable(false);
+        setMaximumSize(new java.awt.Dimension(545, 900));
+        setMinimumSize(new java.awt.Dimension(545, 900));
         setPreferredSize(new java.awt.Dimension(1000, 590));
+        setRequestFocusEnabled(false);
+        setVerifyInputWhenFocusTarget(false);
 
         tfNombre2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -363,6 +400,13 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtBuscar.setText("BUSCAR");
+        jBtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -414,8 +458,11 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                         .addComponent(tFEmpleadoId, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(JBGrabar)
-                                            .addComponent(tFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(tFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(JBGrabar)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jBtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -534,8 +581,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
                     .addComponent(tbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(JBGrabar)
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBGrabar)
+                    .addComponent(jBtBuscar))
+                .addGap(28, 28, 28))
         );
 
         lBIdEmpleado.getAccessibleContext().setAccessibleParent(tFEmpleadoId);
@@ -551,14 +600,11 @@ public class IFempleado extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(273, 273, 273)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,7 +642,6 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_JBGrabarActionPerformed
 
-    
     private void limpiarFormulario(){
         tFApellido1.setText("");
         tFApellido2.setText("");
@@ -620,8 +665,6 @@ public class IFempleado extends javax.swing.JInternalFrame {
         cBRegional.removeAllItems();
         cBSalario.removeAllItems();
     }
-    
-    
     
     private void tFNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNombre1KeyTyped
         if(tFNombre1.getText().length() >= 20)
@@ -757,8 +800,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tFFechaIngresoKeyTyped
 
     private void tFFechaRetiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFFechaRetiroKeyTyped
-        if(tFApellido2.getText().length() >= 10)
-            {
+        if(tFApellido2.getText().length() >= 10){
         evt.consume();
         }
     }//GEN-LAST:event_tFFechaRetiroKeyTyped
@@ -766,6 +808,15 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private void tFBuscarCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFBuscarCiudadKeyTyped
         buscarCiudadComboBoxCiudad();
     }//GEN-LAST:event_tFBuscarCiudadKeyTyped
+
+    private void jBtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarActionPerformed
+        try{
+            buscarEmpleado();
+            buscarCiudadComboBoxCiudad();
+        }catch(Exception e){
+            System.out.println("Vista "+e.getMessage());
+        }
+    }//GEN-LAST:event_jBtBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -776,6 +827,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cBDocumento;
     private javax.swing.JComboBox<String> cBRegional;
     private javax.swing.JComboBox<String> cBSalario;
+    private javax.swing.JButton jBtBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
