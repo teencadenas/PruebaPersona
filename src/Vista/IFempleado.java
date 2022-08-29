@@ -8,7 +8,6 @@ import Clases.Empleado;
 import Clases.Ciudad;
 import Controlador.ControladorCiudad;
 import Controlador.ControladorEmpleado;
-import Controlador.MensajesConfirmacion;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
@@ -27,13 +26,13 @@ public class IFempleado extends javax.swing.JInternalFrame {
      */
     public IFempleado() {
         initComponents();
+        jBActualizar.setEnabled(false);
+        jBEditar.setEnabled(false);
     }
     
     
-    public void buscarEmpleado(){
+    public void cargarEmpleado(Empleado empleado){
         try{
-            String str = tFNumeroIdentificacion.getText();
-            Empleado empleado = controlEmpleado.buscarEmpleado(str);
             tFApellido1.setText(empleado.getApellido1());
             tFApellido2.setText(empleado.getApellido2());
             tFBuscarCiudad.setText(empleado.ciudad.getCiudad());
@@ -53,7 +52,7 @@ public class IFempleado extends javax.swing.JInternalFrame {
             cBCargo.setSelectedItem(empleado.getCargo());
             cBDocumento.setSelectedItem(empleado.getTipoIdPersona());
             cBRegional.setSelectedItem(empleado.getRegional());
-            cBSalario.setSelectedItem(empleado.getTelefono());
+            cBSalario.setSelectedItem(empleado.getSalario());
         }catch(Exception e){
             System.out.println("vista "+e.getMessage());
         }  
@@ -229,6 +228,8 @@ public class IFempleado extends javax.swing.JInternalFrame {
         lbEMailEmpresa = new javax.swing.JLabel();
         tFBuscarCiudad = new javax.swing.JTextField();
         jBtBuscar = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
+        jBActualizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -407,6 +408,20 @@ public class IFempleado extends javax.swing.JInternalFrame {
             }
         });
 
+        jBEditar.setText("EDITAR");
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
+
+        jBActualizar.setText("ACTUALIZAR");
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -429,11 +444,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(tFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(106, 106, 106)
-                                        .addComponent(tFBuscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tFBuscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(lBRegional, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(lBTelefonoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -470,7 +484,12 @@ public class IFempleado extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(lbEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(14, 14, 14)
+                                                .addComponent(jBActualizar))
+                                            .addComponent(tbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addComponent(tFEMailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -583,8 +602,10 @@ public class IFempleado extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBGrabar)
-                    .addComponent(jBtBuscar))
-                .addGap(28, 28, 28))
+                    .addComponent(jBtBuscar)
+                    .addComponent(jBEditar)
+                    .addComponent(jBActualizar))
+                .addGap(40, 40, 40))
         );
 
         lBIdEmpleado.getAccessibleContext().setAccessibleParent(tFEmpleadoId);
@@ -630,9 +651,8 @@ public class IFempleado extends javax.swing.JInternalFrame {
                 tbContraseña.setText(crearClaveUsuario());
                 tFEMailEmpresa.setText(crearCorreoEmpresa());
                 controlEmpleado.crearEmpleado(this.crearNuevoEmpleado());
-                MensajesConfirmacion mensaje = new MensajesConfirmacion();
-                boolean opcion = mensaje.mensajeConfirmacionEmpleado(crearNuevoEmpleado());
-                    if(opcion ==true){              
+                int opcion = this.mensajeConfirmacionEmpleado("Creado",crearNuevoEmpleado());
+                    if(opcion == 0){              
                     controlEmpleado.crearEmpleado(crearNuevoEmpleado());
                     limpiarFormulario();
                     }
@@ -643,27 +663,70 @@ public class IFempleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JBGrabarActionPerformed
 
     private void limpiarFormulario(){
-        tFApellido1.setText("");
-        tFApellido2.setText("");
-        tFBuscarCiudad.setText("");
-        tFDireccion.setText("");
-        tFEMailEmpresa.setText("");
-        tFEMailPersona.setText("");
-        tFEmpleadoId.setText("");
-        tFFechaIngreso.setText("DD-MM-AAA");
-        tFFechaNacimiento.setText("DD-MM-AAA");
-        tFFechaRetiro.setText("DD-MM-AAA");
-        tFNombre1.setText("");
-        tFNumeroIdentificacion.setText("");
-        tFTelefonoPersonal.setText("");
-        tFUsuario.setText("");
-        tfNombre2.setText("");
-        tbContraseña.setText("");
-        cBCargo.removeAllItems();
-        cBCiudadPersona.removeAllItems();
-        cBDocumento.removeAllItems();
-        cBRegional.removeAllItems();
-        cBSalario.removeAllItems();
+        try{
+            tFApellido1.setText("");
+            tFApellido2.setText("");
+            tFBuscarCiudad.setText("");
+            tFDireccion.setText("");
+            tFEMailEmpresa.setText("");
+            tFEMailPersona.setText("");
+            tFEmpleadoId.setText("");
+            tFFechaIngreso.setText("DD-MM-AAA");
+            tFFechaNacimiento.setText("DD-MM-AAA");
+            tFFechaRetiro.setText("DD-MM-AAA");
+            tFFechaRetiro.setEnabled(false);
+            tFNombre1.setText("");
+            tFNumeroIdentificacion.setText("");
+            tFTelefonoPersonal.setText("");
+            tFUsuario.setText("");
+            tfNombre2.setText("");
+            tbContraseña.setText("");
+            cBCargo.setSelectedItem("-");
+            cBCiudadPersona.setSelectedItem("-");
+            cBDocumento.setSelectedItem("-");
+            cBRegional.setSelectedItem("-");
+            cBSalario.setSelectedItem("-");
+        }catch(Exception e){
+                System.out.println("Vista limpiar "+e.getMessage());
+                }    
+    }
+    
+    private void bloquearFormulario(boolean str){
+        try{
+            tFApellido1.setEnabled(str);
+            tFApellido2.setEnabled(str);
+            tFBuscarCiudad.setEnabled(str);
+            tFDireccion.setEnabled(str);
+            tFEMailEmpresa.setEnabled(str);
+            tFEMailPersona.setEnabled(str);
+            tFEmpleadoId.setEnabled(str);
+            tFFechaIngreso.setEnabled(str);
+            tFFechaNacimiento.setEnabled(str);
+            tFFechaRetiro.setEnabled(str);
+            tFNombre1.setEnabled(str);
+            tFNumeroIdentificacion.setEnabled(str);
+            tFTelefonoPersonal.setEnabled(str);
+            tFUsuario.setEnabled(str);
+            tfNombre2.setEnabled(str);
+            tbContraseña.setEnabled(str);
+            cBCargo.setEnabled(str);
+            cBCiudadPersona.setEnabled(str);
+            cBDocumento.setEnabled(str);
+            cBRegional.setEnabled(str);
+            cBSalario.setEnabled(str);
+        }catch(Exception e){
+            System.out.println("Vista bloquear "+e.getMessage());
+        }    
+    }
+    
+    public int mensajeConfirmacionEmpleado(String str,Empleado em) {
+        int mensaje = JOptionPane.showConfirmDialog(null,"Se a" +str+" un empleado:"+
+                em.getNombre1()+" - "+em.getNombre2()+"\n"+em.getApellido1()+" - "+em.getApellido2()+
+                "\n"+em.geteMail()+" - "+em.getTipoIdPersona()+"\n"+em.getNumeroIdPersona()+" - "+
+                em.getTelefono()+"\n"+ em.getFechaNacimiento()+" - "+em.getDireccion()+"\n"+em.getCiudad().getCiudad()+" - "+
+                em.getRegional()+"\n"+em.getCargo()+" - "+em.getSalario()+"\n"+em.getFechaIngreso()+" - "+
+                em.getEmpleadoId()+"\n"+em.getUsuario()+" - "+em.getCorreoEmpresarial());
+        return mensaje;
     }
     
     private void tFNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFNombre1KeyTyped
@@ -811,13 +874,67 @@ public class IFempleado extends javax.swing.JInternalFrame {
 
     private void jBtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarActionPerformed
         try{
-            buscarEmpleado();
-            buscarCiudadComboBoxCiudad();
+            String str = tFNumeroIdentificacion.getText();
+            Empleado empleado = controlEmpleado.buscarEmpleado(str);
+            int mensaje = this.mensajeConfirmacionEmpleado("encontrado", empleado);
+            if(mensaje==0){
+                cargarEmpleado(empleado);
+                buscarCiudadComboBoxCiudad();
+                bloquearFormulario(false);
+                JBGrabar.setEnabled(false);
+                jBEditar.setEnabled(true);
+            }else{
+            this.limpiarFormulario();
+            }
         }catch(Exception e){
             System.out.println("Vista "+e.getMessage());
         }
     }//GEN-LAST:event_jBtBuscarActionPerformed
 
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+        try{
+            Empleado em = crearNuevoEmpleado();
+            int mensaje = JOptionPane.showInternalConfirmDialog(null, " ¿Desea actualizar la informacion ?");
+            if(mensaje == 0){
+                bloquearFormulario(true);
+                cBDocumento.setEnabled(false);
+                tFNumeroIdentificacion.setEnabled(false);
+                tFFechaNacimiento.setEnabled(false);
+                tFFechaIngreso.setEnabled(false);
+                tFFechaRetiro.setEnabled(false);
+                tFEmpleadoId.setEnabled(false);
+                tFUsuario.setEnabled(false);
+                tbContraseña.setEnabled(false);
+                tFEMailEmpresa.setEnabled(false);
+                jBActualizar.setEnabled(true);
+                jBtBuscar.setEnabled(false);
+            }else{
+                bloquearFormulario(true);
+                limpiarFormulario();    
+                jBEditar.setEnabled(false);
+                JBGrabar.setEnabled(true);
+            }
+            controlEmpleado.actualizarEmpleado(em);
+        }catch(Exception e){
+            System.out.println("Vista "+e.getMessage());
+        }
+    }//GEN-LAST:event_jBEditarActionPerformed
+
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
+        try{
+            Empleado empleado = crearNuevoEmpleado();
+            int mensaje = mensajeConfirmacionEmpleado("Actualizara", empleado);
+            if(mensaje==0){
+                boolean actualizar = controlEmpleado.actualizarEmpleado(empleado);
+                if(actualizar){
+                    JOptionPane.showInternalConfirmDialog(null,"El empleado se actualizo correctamente");
+                }
+            }  
+        }catch(Exception e){
+            System.out.println("Vista "+e.getMessage());
+            JOptionPane.showInternalConfirmDialog(null,"No se logro actualizar el Empleado");
+        }
+    }//GEN-LAST:event_jBActualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGrabar;
@@ -827,6 +944,8 @@ public class IFempleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cBDocumento;
     private javax.swing.JComboBox<String> cBRegional;
     private javax.swing.JComboBox<String> cBSalario;
+    private javax.swing.JButton jBActualizar;
+    private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBtBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
